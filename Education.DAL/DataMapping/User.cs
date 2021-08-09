@@ -21,13 +21,13 @@ namespace Education.DAL
         public GroupUser GroupUser { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-        //public virtual ICollection<Candicate> Candicates { get; set; }
-        //public virtual ICollection<Batch> Batchs { get; set; }
-        //public virtual ICollection<Course> Courses { get; set; }
-        //public virtual ICollection<Faulty> Faulties { get; set; }
-        //public virtual ICollection<Exam> Exams { get; set; }
-        //public virtual ICollection<Blog> Blogs { get; set; }
-        //public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Candicate> Candicates { get; set; }
+        public virtual ICollection<Batch> Batchs { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Faulty> Faulties { get; set; }
+        public virtual ICollection<Exam> Exams { get; set; }
+        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
 
 
     }

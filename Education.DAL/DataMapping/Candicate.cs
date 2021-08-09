@@ -23,9 +23,9 @@ namespace Education.DAL
         public string Address { get; set; }
         public DateTime Birthday  { get; set; }
         public DateTime JoiningDate  { get; set; }
-        //public int UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //public virtual User User { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
         public DateTime CreatedAt  { get; set; }
         public DateTime UpdatedAt  { get; set; }
     }

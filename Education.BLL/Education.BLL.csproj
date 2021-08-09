@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DbHandler\DbRepository.cs" />
+    <Compile Include="Repositories\Intefaces\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
