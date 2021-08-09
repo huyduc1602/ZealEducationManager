@@ -18,12 +18,14 @@ namespace Education.Areas.Admin.Controllers
 {
     public class CandicatesController : Controller
     {
+        private EducationManageDbContext ctx;
         private IRepository<Candicate> candicateRepository;
         private IRepository<User> userRepository;
         private IRepository<GroupUser> groupUserRepository;
         private IPaginationService paginationService;
         public CandicatesController()
         {
+            ctx = new EducationManageDbContext();
             candicateRepository = new DbRepository<Candicate>();
             userRepository = new DbRepository<User>();
             groupUserRepository = new DbRepository<GroupUser>();
@@ -209,7 +211,7 @@ namespace Education.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ctx.Dispose();
             }
             base.Dispose(disposing);
         }*/

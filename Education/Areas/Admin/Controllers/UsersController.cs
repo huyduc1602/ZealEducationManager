@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Education.BLL;
 using Education.DAL;
 
 namespace Education.Areas.Admin.Controllers
@@ -13,7 +16,12 @@ namespace Education.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private EducationManageDbContext db = new EducationManageDbContext();
-
+        private EducationManageDbContext ctx;
+        private IRepository<User> tblUser;
+        public UsersController()
+        {
+            ctx = new EducationManageDbContext();
+        }
         // GET: Admin/Users
         public ActionResult Index()
         {
@@ -52,6 +60,8 @@ namespace Education.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = GetMD5(user.Password);
+                ctx.Configuration.ValidateOnSaveEnabled = false;
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,6 +137,20 @@ namespace Education.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] fromData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(fromData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+
+            }
+            return byte2String;
         }
     }
 }
