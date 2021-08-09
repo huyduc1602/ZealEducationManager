@@ -6,21 +6,55 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Education.BLL;
 using Education.DAL;
+using Education.Areas.Admin.Data;
+using Education.Areas.Admin.Data.BusinessModel;
+using Newtonsoft.Json;
 
 namespace Education.Areas.Admin.Controllers
 {
     public class CandicatesController : Controller
     {
-        private EducationManageDbContext db = new EducationManageDbContext();
+        private IRepository<Candicate> candicateRepository;
+        private IRepository<User> userRepository;
+        private IPaginationService paginationService;
+        public CandicatesController()
+        {
+            candicateRepository = new DbRepository<Candicate>();
+            userRepository = new DbRepository<User>();
+            paginationService = new DbPaginationService();
+        }
 
         // GET: Admin/Candicates
         public ActionResult Index()
         {
-            var candicates = db.Candicates;
+            var candicates = candicateRepository.Get();
             return View(candicates.ToList());
         }
 
+        public ActionResult GetData(int CurrentPage, int Limit, string Key)
+        {
+            var cadicate = candicateRepository.Get();
+            if (!String.IsNullOrEmpty(Key))
+            {
+                cadicate = cadicate.Where(x => x.Name.Contains("/" + Key + "/")
+                                            || x.Code.Contains("/" + Key + "/")
+                                            || x.ParentName.Contains("/" + Key + "/")
+                                            || x.ParentPhone.Contains("/" + Key + "/")
+                                            || x.Email.Contains("/" + Key + "/")
+                                            || x.Phone.Contains("/" + Key + "/"));
+            }
+            Pagination pagination = paginationService.getInfoPaginate(cadicate.Count(), Limit, CurrentPage);
+            var json = JsonConvert.SerializeObject(user.Skip((CurrentPage - 1) * limit).Take(limit));
+            var data = json;
+            return Json(new
+            {
+                paginate = pagination,
+                data = data,
+                Key = Key,
+            }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Admin/Candicates/Details/5
         public ActionResult Details(int? id)
         {
