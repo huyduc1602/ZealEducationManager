@@ -176,3 +176,6 @@ F:\Project\Education\obj\Debug\Education.csproj.CoreCompileInputs.cache
 F:\Project\Education\obj\Debug\Education.csproj.CopyComplete
 F:\Project\Education\obj\Debug\Education.dll
 F:\Project\Education\obj\Debug\Education.pdb
+C:\Project .Net\Project\Education\bin\EntityFramework.dll
+C:\Project .Net\Project\Education\obj\Debug\Education.csproj.AssemblyReference.cache
+C:\Project .Net\Project\Education\obj\Debug\Education.csproj.CoreCompileInputs.cache

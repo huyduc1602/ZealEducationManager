@@ -137,10 +137,13 @@
     <Compile Include="Areas\Admin\Controllers\FaultiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LearningInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\DbPaginationService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\Interface\IPaginationService.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\BatchModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\CandicateModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\FaultyModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\LearningInfoModel.cs" />
+    <Compile Include="Areas\Admin\Data\DataModel\Pagination.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
