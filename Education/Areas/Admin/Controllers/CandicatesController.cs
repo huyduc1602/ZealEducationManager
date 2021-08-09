@@ -11,6 +11,8 @@ using Education.DAL;
 using Education.Areas.Admin.Data;
 using Education.Areas.Admin.Data.BusinessModel;
 using Newtonsoft.Json;
+using Education.Areas.Admin.Data.DataModel;
+using System.IO;
 
 namespace Education.Areas.Admin.Controllers
 {
@@ -19,12 +21,14 @@ namespace Education.Areas.Admin.Controllers
         private EducationManageDbContext ctx;
         private IRepository<Candicate> candicateRepository;
         private IRepository<User> userRepository;
+        private IRepository<GroupUser> groupUserRepository;
         private IPaginationService paginationService;
         public CandicatesController()
         {
             ctx = new EducationManageDbContext();
             candicateRepository = new DbRepository<Candicate>();
             userRepository = new DbRepository<User>();
+            groupUserRepository = new DbRepository<GroupUser>();
             paginationService = new DbPaginationService();
         }
 
@@ -32,7 +36,7 @@ namespace Education.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var candicates = candicateRepository.Get();
-            return View(candicates.ToList());
+            return View(candicates);
         }
 
         public ActionResult GetData(int CurrentPage, int Limit, string Key)
@@ -48,13 +52,13 @@ namespace Education.Areas.Admin.Controllers
                                             || x.Phone.Contains("/" + Key + "/"));
             }
             Pagination pagination = paginationService.getInfoPaginate(cadicate.Count(), Limit, CurrentPage);
-            //var json = JsonConvert.SerializeObject(user.Skip((CurrentPage - 1) * limit).Take(limit));
-            var data = "json";
+            var json = JsonConvert.SerializeObject(cadicate.Skip((CurrentPage - 1) * Limit).Take(Limit));
+            var data = json;
             return Json(new
             {
                 paginate = pagination,
                 data = data,
-                Key = Key,
+                key = Key,
             }, JsonRequestBehavior.AllowGet);
         }
         // GET: Admin/Candicates/Details/5
@@ -64,7 +68,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = candicateRepository.findById(id);
+            Candicate candicate = candicateRepository.FindById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -83,16 +87,66 @@ namespace Education.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Code,Name,ParentName,Email,Phone,ParentPhone,Image,Gender,Address,Birthday,JoiningDate,UserId,CreateAt,UpdateAt")] Candicate candicate)
+        public ActionResult Create(CandicateModel candicate)
         {
+            if (candicateRepository.Get(x => x.Code.Equals(candicate.Code)).Count() > 0)
+            {
+                ModelState.AddModelError("Code", "Student code available");
+            }else if (candicateRepository.Get(x => x.Email.Equals(candicate.Email)).Count() > 0)
+            {
+                ModelState.AddModelError("Email", "Email available");
+            }
+            else if (userRepository.Get(x => x.UserName.Equals(candicate.UserName)).Count() > 0)
+            {
+                ModelState.AddModelError("UserName", "Username available");
+            }
+            else if (candicate.Image == null)
+            {
+                ModelState.AddModelError("Image", "Student images are not empty");
+            }
             if (ModelState.IsValid)
             {
-                candicateRepository.add(candicate);
-                ctx.SaveChanges();
-                return RedirectToAction("Index");
+                if (candicate.Image != null && candicate.Image.ContentLength > 0)
+                {
+                    GroupUser groupUser = groupUserRepository.Get(x => x.Name.Equals("Candicate")).First();
+                    int groupId = groupUser.Id;
+                    User user = new User
+                    {
+                        UserName = candicate.UserName,
+                        Password = candicate.Password,
+                        Email = candicate.Email,
+                        FullName = candicate.FullName,
+                        GroupUserId = groupUser.Id,
+                        CreatedDate = DateTime.Today,
+                    };
+                    userRepository.Add(user);
+                    User u = userRepository.Get(x => x.UserName.Equals(candicate.UserName)).SingleOrDefault();
+                    string lastName = candicate.Image.FileName;
+                    string[] words = lastName.Split('.');
+                    int size = words.Count();
+                    string fileName = candicate.UserName + DateTime.Today.ToString("ddmmyyyy") + "." + words[size - 1];
+                    Candicate student = new Candicate
+                    {
+                        Code = candicate.Code,
+                        Name = candicate.Name,
+                        Email = candicate.Email,
+                        ParentName = candicate.ParentName,
+                        ParentPhone = candicate.ParentPhone,
+                        Image = fileName,
+                        Gender = candicate.Gender,
+                        Phone = candicate.Phone,
+                        Address = candicate.Address,
+                        Birthday = candicate.Birthday,
+                        JoiningDate = candicate.JoiningDate,
+                        CreatedAt = DateTime.Today,
+                        UserId = u.Id,
+                    };
+                    candicateRepository.Add(student);
+                    string path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/assets/img/student"), fileName);
+                    candicate.Image.SaveAs(path);
+                    return RedirectToAction("Index");
+                }
             }
-
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", candicate.UserId);
             return View(candicate);
         }
 
@@ -103,7 +157,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = candicateRepository.findById(id);
+            Candicate candicate = candicateRepository.FindById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -121,7 +175,7 @@ namespace Education.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                candicateRepository.edit(candicate);
+                candicateRepository.Edit(candicate);
                 return RedirectToAction("Index");
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", candicate.UserId);
@@ -135,7 +189,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = candicateRepository.findById(id);
+            Candicate candicate = candicateRepository.FindById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -148,17 +202,18 @@ namespace Education.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            candicateRepository.remove(id);
+            Candicate candicate = candicateRepository.FindById(id);
+            candicateRepository.Remove(candicate);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 ctx.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
