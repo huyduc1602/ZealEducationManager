@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Data\DataModel\FaultyModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\LearningInfoModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\Pagination.cs" />
+    <Compile Include="Areas\Admin\Data\DataModel\UserLoginModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2641,6 +2642,8 @@
     <Content Include="Areas\Admin\Views\Faulties\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Faulties\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Faulties\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Login.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

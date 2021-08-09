@@ -16,11 +16,13 @@ namespace Education.Areas.Admin.Controllers
 {
     public class CandicatesController : Controller
     {
+        private EducationManageDbContext ctx;
         private IRepository<Candicate> candicateRepository;
         private IRepository<User> userRepository;
         private IPaginationService paginationService;
         public CandicatesController()
         {
+            ctx = new EducationManageDbContext();
             candicateRepository = new DbRepository<Candicate>();
             userRepository = new DbRepository<User>();
             paginationService = new DbPaginationService();
@@ -46,8 +48,8 @@ namespace Education.Areas.Admin.Controllers
                                             || x.Phone.Contains("/" + Key + "/"));
             }
             Pagination pagination = paginationService.getInfoPaginate(cadicate.Count(), Limit, CurrentPage);
-            var json = JsonConvert.SerializeObject(user.Skip((CurrentPage - 1) * limit).Take(limit));
-            var data = json;
+            //var json = JsonConvert.SerializeObject(user.Skip((CurrentPage - 1) * limit).Take(limit));
+            var data = "json";
             return Json(new
             {
                 paginate = pagination,
@@ -62,7 +64,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = db.Candicates.Find(id);
+            Candicate candicate = candicateRepository.findById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -73,7 +75,6 @@ namespace Education.Areas.Admin.Controllers
         // GET: Admin/Candicates/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
@@ -86,8 +87,8 @@ namespace Education.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Candicates.Add(candicate);
-                db.SaveChanges();
+                candicateRepository.add(candicate);
+                ctx.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -102,7 +103,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = db.Candicates.Find(id);
+            Candicate candicate = candicateRepository.findById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -120,8 +121,7 @@ namespace Education.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(candicate).State = EntityState.Modified;
-                db.SaveChanges();
+                candicateRepository.edit(candicate);
                 return RedirectToAction("Index");
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", candicate.UserId);
@@ -135,7 +135,7 @@ namespace Education.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candicate candicate = db.Candicates.Find(id);
+            Candicate candicate = candicateRepository.findById(id);
             if (candicate == null)
             {
                 return HttpNotFound();
@@ -148,9 +148,7 @@ namespace Education.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Candicate candicate = db.Candicates.Find(id);
-            db.Candicates.Remove(candicate);
-            db.SaveChanges();
+            candicateRepository.remove(id);
             return RedirectToAction("Index");
         }
 
@@ -158,7 +156,7 @@ namespace Education.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ctx.Dispose();
             }
             base.Dispose(disposing);
         }
