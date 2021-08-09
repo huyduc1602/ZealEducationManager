@@ -19,8 +19,10 @@ namespace Education.DAL
         public int GroupUserId { get; set; }
         [ForeignKey("GroupUserId")]
         public GroupUser GroupUser { get; set; }
+        [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? UpdatedDate { get; set; }
         public virtual ICollection<Candicate> Candicates { get; set; }
         public virtual ICollection<Batch> Batchs { get; set; }
         public virtual ICollection<Course> Courses { get; set; }

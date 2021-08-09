@@ -22,7 +22,9 @@ namespace Education.DAL
         public int FautlyId { get; set; }
         [ForeignKey("FautlyId")]
         public virtual Faulty Faulty { get; set; }
+        [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? UpdatedAt { get; set; }
     }
 }
