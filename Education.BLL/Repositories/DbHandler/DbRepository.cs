@@ -20,7 +20,7 @@ namespace Education.BLL
             context = new EducationManageDbContext();
             tbl = context.Set<T>();
         }
-        public bool add(T model)
+        public bool Add(T model)
         {
             try
             {
@@ -34,12 +34,12 @@ namespace Education.BLL
             }
         }
 
-        public bool checkDuplicate(Expression<Func<T, bool>> predicate)
+        public bool CheckDuplicate(Expression<Func<T, bool>> predicate)
         {
             return tbl.AsNoTracking().Any(predicate);
         }
 
-        public bool edit(T model)
+        public bool Edit(T model)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Education.BLL
             }
         }
 
-        public T findById(object id)
+        public T FindById(object id)
         {
             try
             {
@@ -75,11 +75,11 @@ namespace Education.BLL
             return tbl.Where(predicate).AsEnumerable();
         }
 
-        public bool remove(object id)
+        public bool Remove(object id)
         {
             try
             {
-                var entity = findById(id);
+                var entity = FindById(id);
                 tbl.Remove(entity);
                 context.SaveChanges();
                 return true;
@@ -90,7 +90,7 @@ namespace Education.BLL
             }
         }
 
-        public bool remove(T item)
+        public bool Remove(T item)
         {
             try
             {
