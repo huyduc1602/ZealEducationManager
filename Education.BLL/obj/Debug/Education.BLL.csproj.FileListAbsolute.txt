@@ -1,0 +1,30 @@
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.BLL.dll.config
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.BLL.dll
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.BLL.pdb
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.DAL.dll
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\EntityFramework.dll
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.DAL.pdb
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\Education.DAL.dll.config
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\EntityFramework.xml
+C:\Project .Net\ASP .NET\Education.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Project .Net\ASP .NET\Education.BLL\obj\Debug\Education.BLL.csproj.AssemblyReference.cache
+C:\Project .Net\ASP .NET\Education.BLL\obj\Debug\Education.BLL.csproj.CoreCompileInputs.cache
+C:\Project .Net\ASP .NET\Education.BLL\obj\Debug\Education.BLL.csproj.CopyComplete
+C:\Project .Net\ASP .NET\Education.BLL\obj\Debug\Education.BLL.dll
+C:\Project .Net\ASP .NET\Education.BLL\obj\Debug\Education.BLL.pdb
+F:\Project\Education.BLL\bin\Debug\Education.BLL.dll.config
+F:\Project\Education.BLL\bin\Debug\Education.BLL.dll
+F:\Project\Education.BLL\bin\Debug\Education.BLL.pdb
+F:\Project\Education.BLL\bin\Debug\Education.DAL.dll
+F:\Project\Education.BLL\bin\Debug\EntityFramework.dll
+F:\Project\Education.BLL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Project\Education.BLL\bin\Debug\Education.DAL.pdb
+F:\Project\Education.BLL\bin\Debug\Education.DAL.dll.config
+F:\Project\Education.BLL\bin\Debug\EntityFramework.xml
+F:\Project\Education.BLL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CoreCompileInputs.cache
+F:\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CopyComplete
+F:\Project\Education.BLL\obj\Debug\Education.BLL.dll
+F:\Project\Education.BLL\obj\Debug\Education.BLL.pdb
+F:\Project\Education.BLL\obj\Debug\Education.BLL.csprojAssemblyReference.cache
