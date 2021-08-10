@@ -17,7 +17,6 @@ namespace Education.Areas.Admin.Controllers
     {
         private EducationManageDbContext db = new EducationManageDbContext();
         private EducationManageDbContext ctx;
-        private IRepository<User> tblUser;
         public UsersController()
         {
             ctx = new EducationManageDbContext();

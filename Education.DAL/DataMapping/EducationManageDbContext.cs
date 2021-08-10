@@ -40,6 +40,9 @@ namespace Education.DAL
         public System.Data.Entity.DbSet<Education.DAL.Candicate> Candicates { get; set; }
 
         public System.Data.Entity.DbSet<Education.DAL.Faulty> Faulties { get; set; }
+        public System.Data.Entity.DbSet<Education.DAL.Bussiness> Bussinesses { get; set; }
+        public System.Data.Entity.DbSet<Education.DAL.Permission> Permissions { get; set; }
+        public System.Data.Entity.DbSet<Education.DAL.GroupPermission> GroupPermissions { get; set; }
     }
 
 }

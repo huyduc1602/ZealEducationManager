@@ -43,3 +43,18 @@ C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CoreCompile
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CopyComplete
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.dll
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.pdb
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.BLL.dll.config
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.BLL.dll
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.BLL.pdb
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.DAL.dll
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\EntityFramework.dll
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.DAL.pdb
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\Education.DAL.dll.config
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\EntityFramework.xml
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\obj\Debug\Education.BLL.csproj.AssemblyReference.cache
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\obj\Debug\Education.BLL.csproj.CoreCompileInputs.cache
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\obj\Debug\Education.BLL.csproj.CopyComplete
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\obj\Debug\Education.BLL.dll
+C:\Users\hoang\OneDrive\Project\.NET-MVC\ZealEducationManager\Education.BLL\obj\Debug\Education.BLL.pdb

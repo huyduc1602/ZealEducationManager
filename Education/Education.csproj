@@ -129,6 +129,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BatchController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BussinessesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CandicatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
@@ -141,10 +142,12 @@
     <Compile Include="Areas\Admin\Data\BusinessModel\Interface\IPaginationService.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\BatchModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\CandicateModel.cs" />
+    <Compile Include="Areas\Admin\Data\DataModel\CourseModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\FaultyModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\LearningInfoModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\Pagination.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\UserLoginModel.cs" />
+    <Compile Include="Areas\Admin\Data\Helper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2644,6 +2647,7 @@
     <Content Include="Areas\Admin\Views\Faulties\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Register.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Bussinesses\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3699,6 +3703,7 @@
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\assets\js\" />
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\assets\plugins\fontawesome\css\" />
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\html-template\" />
+    <Folder Include="Areas\Admin\Content\assets\img\course\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\css\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\img\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\js\" />
