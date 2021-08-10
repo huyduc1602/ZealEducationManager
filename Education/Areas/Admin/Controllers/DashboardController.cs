@@ -52,7 +52,7 @@ namespace Education.Areas.Admin.Controllers
                 {
                     _user.Password = GetMD5(_user.Password);
                     ctx.Configuration.ValidateOnSaveEnabled = false;
-                    tblUser.add(_user);
+                    tblUser.Add(_user);
                     ctx.SaveChanges();
                     return RedirectToAction("Index");
                 }

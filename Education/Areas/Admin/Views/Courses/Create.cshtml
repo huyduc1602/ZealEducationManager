@@ -1,4 +1,4 @@
-﻿@model Education.DAL.Course
+﻿@model Education.Areas.Admin.Data.DataModel.CourseModel
 
 @{
     ViewBag.Title = "Create";
@@ -20,7 +20,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Create", "Courses", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -82,9 +82,10 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label" })
                                 <input type="file" name="Image" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                       
+
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

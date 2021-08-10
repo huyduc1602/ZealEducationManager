@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Education.DAL.DataMapping
+namespace Education.DAL
 {
-    class GroupPermission
+    public class GroupPermission
     {
         public int Id { get; set; }
         public int GroupUserId { get; set; }
