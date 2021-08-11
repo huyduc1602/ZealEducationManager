@@ -20,11 +20,10 @@
         </div>
         <div class="col-auto text-right float-right ml-auto">
             <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-            <a href="@Url.Action("Create","Course")" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="@Url.Action("Create","Courses")" class="btn btn-primary"><i class="fas fa-plus"></i></a>
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table">
@@ -51,7 +50,7 @@
                                     <td> @Html.DisplayFor(modelItem => item.Code)</td>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="student-details.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src=" @Html.DisplayFor(modelItem => item.Image)" alt="User Image"></a>
+                                            <a href="student-details.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="@Html.DisplayFor(modelItem => item.Image)" alt="Course Image"></a>
                                             <a href="student-details.html"> @Html.DisplayFor(modelItem => item.Name)</a>
                                         </h2>
                                     </td>
@@ -63,12 +62,15 @@
                                     <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="@Url.Action("Edit","Course")" class="btn btn-sm bg-success-light mr-2">
+                                            @using (Html.BeginForm("Delete", "Courses",FormMethod.Post, new { id = item.Id }))
+                                            {
+                                            <a href="@Url.Action("Edit", "Courses", new { Id = item.Id })" class="btn btn-sm bg-success-light mr-2">
                                                 <i class="fas fa-pen"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm bg-danger-light" data="@item.Id">
+                                            <button data="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-sm bg-danger-light delete-confirm">
                                                 <i class="fas fa-trash"></i>
-                                            </a>
+                                            </button>
+                                            }
                                         </div>
                                     </td>
                                 </tr>
@@ -83,4 +85,25 @@
 </div>
 @section pluginjs{
     <script src="~/Areas/Admin/Content/assets/plugins/datatables/datatables.min.js"></script>
+}
+@section scripts{
+    @*<script>
+    $('.delete-confirm').click(function () {
+        if (confirm("Are you sure you want to delete it?")) {
+            var id = $(this).data();
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Delete")",
+                data: { id: id },
+                success: function () {
+                    alert("Xóa oke");
+                },
+                error: function (req, status, error) {
+                    alert("Xóa lỗi");
+                }
+            })
+        }
+
+    })
+    </script>*@
 }

@@ -187,6 +187,32 @@
                                 <li>@Html.ActionLink("Course Add", "Create", "Courses")</a></li>
                             </ul>
                         </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-clipboard-list"></i> <span> Exams</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>@Html.ActionLink("Exam List", "Index", "Exams")</a></li>
+                                <li>@Html.ActionLink("Exam Add", "Create", "Exams")</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-blog"></i> <span> Blogs</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>@Html.ActionLink("Blog List", "Index", "Blogs")</a></li>
+                                <li>@Html.ActionLink("Blog Add", "Create", "Blogs")</a></li>
+                                <li>@Html.ActionLink("Category List", "Index", "Categories")</a></li>
+                                <li>@Html.ActionLink("Category Add", "Create", "Categories")</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fas fa-user-circle"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li>@Html.ActionLink("User List", "Index", "Users")</a></li>
+                                <li>@Html.ActionLink("User Add", "Create", "Users")</a></li>
+                                <li>@Html.ActionLink("Group User List", "Index", "GroupUsers")</a></li>
+                                <li>@Html.ActionLink("Group User Add", "Create", "GroupUsers")</a></li>
+                                <li>@Html.ActionLink("Grant Permisson", "GrantPermission", "GroupUsers")</a></li>
+                            </ul>
+                        </li>
 
                         <li class="menu-title">
                             <span>Management</span>

@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Education.Areas.Admin.Data;
 using Education.DAL;
 
 namespace Education.Areas.Admin.Controllers
 {
+    [CustomizeAuthorize]
     public class CategoriesController : Controller
     {
         private EducationManageDbContext db = new EducationManageDbContext();
@@ -39,6 +41,7 @@ namespace Education.Areas.Admin.Controllers
         // GET: Admin/Categories/Create
         public ActionResult Create()
         {
+            ViewBag.ParentId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
