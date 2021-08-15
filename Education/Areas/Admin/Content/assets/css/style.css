@@ -2648,7 +2648,6 @@ table.table-inbox tbody tr.checked {
 /*-----------------
 	20. Responsive
 -----------------------*/
-
 @media only screen and (min-width: 1199.5px) and (max-width: 1620px) {
 	.sm-box p {
 		color: #fff;

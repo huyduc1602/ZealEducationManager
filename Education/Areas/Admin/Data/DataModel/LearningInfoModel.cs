@@ -8,7 +8,6 @@ namespace Education.Areas.Admin.Data.DataModel
 {
     public class LearningInfoModel
     {
-        [Key]
         public int Id { get; set; }
         public float Point { get; set; }
         public int Number { get; set; }

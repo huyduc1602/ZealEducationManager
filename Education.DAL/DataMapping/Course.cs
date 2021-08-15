@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,10 +22,12 @@ namespace Education.DAL
         public string Detail { get; set; }
         public string Image { get; set; }
         public int MaximumCandicate { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ClassRoom> ClassRooms { get; set; }
     }
 }

@@ -51,10 +51,35 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNetCore.Http.Features.5.0.8\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Primitives.5.0.1\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Pipelines, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Pipelines.5.0.1\lib\net461\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -137,10 +162,20 @@
     <Compile Include="Areas\Admin\Controllers\FaultiesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LearningInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\DbBatchModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\DbCandicateModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\DbFaultyModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\DbPaginationService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\Interface\IBatchModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\Interface\ICandicateModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\Interface\IFaultyModelService.cs" />
+    <Compile Include="Areas\Admin\Data\BusinessModel\Interface\IPaginationService.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\BatchModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\CandicateModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\FaultyModel.cs" />
     <Compile Include="Areas\Admin\Data\DataModel\LearningInfoModel.cs" />
+    <Compile Include="Areas\Admin\Data\DataModel\Pagination.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\FaultyView.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1294,6 +1329,7 @@
     <Content Include="Areas\Admin\Content\assets\css\html-template\teachers.html" />
     <Content Include="Areas\Admin\Content\assets\css\index.html" />
     <Content Include="Areas\Admin\Content\assets\css\materialdesignicons.min.html" />
+    <Content Include="Areas\Admin\Content\assets\css\candicate.css" />
     <Content Include="Areas\Admin\Content\assets\css\style.css" />
     <Content Include="Areas\Admin\Content\assets\img\assets\css\animate.html" />
     <Content Include="Areas\Admin\Content\assets\img\assets\css\assets\css\animate.html" />
@@ -2555,7 +2591,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Batch\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Batch\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Fautlies\Create.cshtml" />
     <Content Include="Areas\Admin\Views\LearningInfo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Delete.cshtml" />
@@ -2599,11 +2634,9 @@
     <Content Include="Areas\Admin\Content\assets\plugins\summernote\dist\font\summernotec360.ttf" />
     <Content Include="Areas\Admin\Content\assets\plugins\summernote\dist\font\summernotec360.woff" />
     <Content Include="Areas\Admin\Views\Candicates\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Candicates\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Candicates\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Candicates\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Candicates\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Fautlies\Index.cshtml" />
     <Content Include="Content\assets\fonts\ElegantIcons.eot" />
     <Content Include="Content\assets\fonts\ElegantIcons.ttf" />
     <Content Include="Content\assets\fonts\ElegantIcons.woff" />
@@ -2634,10 +2667,11 @@
     <Content Include="Content\assets\fonts\fa-solid-900.woff2" />
     <Content Include="Content\assets\fonts\fa-solid-900d41d.eot" />
     <Content Include="Areas\Admin\Views\Faulties\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Faulties\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Faulties\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Faulties\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Faulties\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Faulties\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Batch\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Batch\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3693,6 +3727,7 @@
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\assets\js\" />
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\assets\plugins\fontawesome\css\" />
     <Folder Include="Areas\Admin\Content\assets\img\assets\plugins\fontawesome\css\html-template\html-template\html-template\" />
+    <Folder Include="Areas\Admin\Content\assets\img\faulty\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\css\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\img\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\assets\css\assets\js\" />
@@ -3718,6 +3753,7 @@
     <Folder Include="Areas\Admin\Content\assets\img\html-template\html-template\assets\js\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\html-template\assets\plugins\fontawesome\css\" />
     <Folder Include="Areas\Admin\Content\assets\img\html-template\html-template\html-template\" />
+    <Folder Include="Areas\Admin\Content\assets\img\student\" />
     <Folder Include="Areas\Admin\Content\assets\js\assets\css\assets\css\assets\css\" />
     <Folder Include="Areas\Admin\Content\assets\js\assets\css\assets\css\assets\img\" />
     <Folder Include="Areas\Admin\Content\assets\js\assets\css\assets\css\assets\js\" />

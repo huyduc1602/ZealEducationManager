@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +12,7 @@ namespace Education.DAL
     public class Faulty
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -22,10 +24,13 @@ namespace Education.DAL
         public double Salary { get; set; }
         public string Qualification { get; set; }
         public DateTime Birthday { get; set; }
-        //public int UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //public virtual User User { get; set; }
+        [Display(Name = "User Id")]
+        public int UserId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? UpdatedAt { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ClassRoom> ClassRooms { get; set; }
     }
 }

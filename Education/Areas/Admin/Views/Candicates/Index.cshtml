@@ -7,6 +7,7 @@
 
 @section plugincss{
     <link href="~/Areas/Admin/Content/assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/assets/css/candicate.css" rel="stylesheet" />
 }
 
 <div class="page-header">
@@ -19,8 +20,8 @@
             </ul>
         </div>
         <div class="col-auto text-right float-right ml-auto">
-            <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-            <a href="@Url.Action("Create","Candicate")" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i>Download</a>
+            <a href="@Url.Action("Create","Candicates")" class="btn btn-primary"><i class="fas fa-plus"></i></a>
         </div>
     </div>
 </div>
@@ -29,6 +30,7 @@
     <div class="col-sm-12">
         <div class="card card-table">
             <div class="card-body">
+                <input type="text" placeholder="Search" id="search" class="search">
                 <div class="table-responsive">
                     <table class="table table-hover table-center mb-0 datatable">
                         <thead>
@@ -37,54 +39,46 @@
                                 <th>@Html.DisplayNameFor(model => model.Name)</th>
                                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                                 <th>@Html.DisplayNameFor(model => model.Phone)</th>
-                                <th>@Html.DisplayNameFor(model => model.Gender)</th>
-                                <th>@Html.DisplayNameFor(model => model.Address)</th>
-                                <th>@Html.DisplayNameFor(model => model.Birthday)</th>
-                                <th>@Html.DisplayNameFor(model => model.JoiningDate)</th>
                                 <th>@Html.DisplayNameFor(model => model.ParentName)</th>
                                 <th>@Html.DisplayNameFor(model => model.ParentPhone)</th>
-                                @*<th>@Html.DisplayNameFor(model => model.User.UserName)</th>*@
+                                <th>@Html.DisplayNameFor(model => model.User.UserName)</th>
                                 <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
                                 <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="load-candicate">
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td> @Html.DisplayFor(modelItem => item.Code)</td>
                                     <td>
                                         <h2 class="table-avatar">
-                                            <a href="student-details.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src=" @Html.DisplayFor(modelItem => item.Image)" alt="User Image"></a>
-                                            <a href="student-details.html"> @Html.DisplayFor(modelItem => item.Name)</a>
+                                            <a href="/Admin/Candicates/Details/@Html.DisplayFor(modelItem => item.Id)" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="~/Areas/Admin/Content/assets/img/student/@Html.DisplayFor(modelItem => item.Image)" alt="User Image"></a>
+                                            <a href="/Admin/Candicates/Details/@Html.DisplayFor(modelItem => item.Id)"> @Html.DisplayFor(modelItem => item.Name)</a>
                                         </h2>
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Birthday)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.JoiningDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ParentName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ParentPhone)</td>
-                                    @*<td>@Html.DisplayFor(modelItem => item.User.UserName)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.User.UserName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
                                     <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="edit-student.html" class="btn btn-sm bg-success-light mr-2">
+                                            <a href="/Admin/Candicates/Edit/@Html.DisplayFor(modelItem => item.Id)" class="btn btn-sm bg-success-light mr-2">
                                                 <i class="fas fa-pen"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm bg-danger-light" data="@item.Id">
+                                            <a href="#" class="btn btn-sm btn-warning btn-remove" data-id="@item.Id">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
                             }
-                              
-                            </tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -93,4 +87,132 @@
 </div>
 @section pluginjs{
     <script src="~/Areas/Admin/Content/assets/plugins/datatables/datatables.min.js"></script>
+}
+
+@section scripts{
+    <script>
+        var managerCandicate = {
+            load: function (CurrentPage = 1, Limit = 10, Key = null) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/Candicates/GetData",
+                    data: { CurrentPage: CurrentPage, Limit: Limit, Key: Key },
+                    success: function (res) {
+                        res.data = JSON.parse(res.data);
+                        html = '';
+                        for (let item of res.data) {
+                            let createAt = moment(item.CreatedAt).format('DD-MM-YYYY');
+                            let updateAt = '';
+                            if (item.UpdatedAt != null) {
+                                updateAt = moment(item.UpdatedAt).format('DD-MM-YYYY');
+                            } else {
+                                updateAt = 'Chưa cập nhật';
+                            }
+                            html += `<tr>
+                                                <td>${item.Code}</td>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="/Admin/Candicates/Details/${item.Id}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/Areas/Admin/Content/assets/img/student/${item.Image}" alt="User Image"></a>
+                                                        <a href="/Admin/Candicates/Details/${item.Id}">${item.Name}</a>
+                                                    </h2>
+                                                </td>
+                                                <td>${item.Email}</td>
+                                                <td>${item.Phone}</td>
+                                                <td>${item.ParentName}</td>
+                                                <td>${item.ParentPhone}</td>
+                                                <td>${item.User.UserName}</td>
+                                                <td>${createAt}</td>
+                                                <td>${updateAt}</td>
+                                                <td class="text-right">
+                                                    <div class="actions">
+                                                        <a href="/Admin/Candicates/Edit/${item.Id}" class="btn btn-sm bg-success-light mr-2">
+                                                            <i class="fas fa-pen"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-warning btn-remove" data-id="${item.Id}">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>`;
+                        }
+                        let paginate = '';
+                        if (res.paginate.CurrentPage == 1) {
+                            paginate += `<li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
+                                                    <a href="javascript:void(0)" aria-controls="DataTables_Table_0" class="page-link">Previous</a>
+                                                </li>`;
+                        } else {
+                            paginate += `<li class="paginate_button page-item previous page-previous" id="DataTables_Table_0_previous">
+                                                    <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${res.paginate.CurrentPage - 1}" class="page-link page">Previous</a>
+                                                </li>`;
+                        }
+                        for (var i = 1; i <= res.paginate.TotalPage; i++) {
+                            if (i == res.paginate.CurrentPage) {
+                                paginate += `<li class="paginate_button page-item active">
+                                                    <a href="javascript:void(0)" data-id="${i}" aria-controls="DataTables_Table_0" class="page-link current-page">${i}</a>
+                                                </li>`;
+                            } else {
+                                paginate += `<li class="paginate_button page-item">
+                                                    <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${i}" class="page-link page">${i}</a>
+                                                </li>`;
+                            }
+                        }
+                        if (res.paginate.CurrentPage == res.paginate.TotalPage) {
+                            paginate += `<li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
+                                                    <a href="javascript:void(0)" aria-controls="DataTables_Table_0" class="page-link">Next</a>
+                                                </li>`;
+                        } else {
+                            paginate += `<li class="paginate_button page-item next page-next" id="DataTables_Table_0_next">
+                                                    <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${res.paginate.CurrentPage + 1}" class="page-link page">Next</a>
+                                                </li>`;
+                        }
+                        $(".load-candicate").html(html);
+                        $(".pagination").html(paginate);
+                    }
+                })
+            },
+            delete: function (id, limit, key, currentPage) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/Candicates/Remove",
+                    data: { id: id },
+                    success: function (data) {
+                        if (data.StatusCode == 200) {
+                            alert(data.message);
+                            managerCandicate.load(currentPage, limit, key);
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                })
+            }
+        }
+        $(function () {
+            managerCandicate.load();
+            $(".custom-select").change(function () {
+                let limit = $(".custom-select").val();
+                let key = $("#search").val();
+                managerCandicate.load(1, limit, key);
+            });
+            $(document).on("click", ".page", function () {
+                let page = $(this).data("id");
+                let limit = $(".custom-select").val();
+                let key = $("#search").val();
+                managerCandicate.load(page, limit, key);
+            })
+            $("#search").keyup(function () {
+                let limit = $(".custom-select").val();
+                let key = $("#search").val();
+                console.log(key);
+                managerCandicate.load(1, limit, key);
+            })
+            $(document).on("click", ".btn-remove", function () {
+                let id = $(this).data("id");
+                let limit = $(".custom-select").val();
+                let key = $("#search").val();
+                let currentPage = $(".current-page").data("id");
+                managerCandicate.delete(id, limit, key, currentPage);
+            })
+        })
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 }
