@@ -47,8 +47,9 @@ namespace Education.BLL
                 context.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception E)
             {
+                string e = E.Message;
                 return false;
             }
         }

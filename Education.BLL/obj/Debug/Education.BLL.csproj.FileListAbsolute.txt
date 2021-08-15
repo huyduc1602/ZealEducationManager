@@ -34,10 +34,12 @@ C:\Project .Net\Project\Education.BLL\bin\Debug\Education.BLL.pdb
 C:\Project .Net\Project\Education.BLL\bin\Debug\Education.DAL.dll
 C:\Project .Net\Project\Education.BLL\bin\Debug\EntityFramework.dll
 C:\Project .Net\Project\Education.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Project .Net\Project\Education.BLL\bin\Debug\Newtonsoft.Json.dll
 C:\Project .Net\Project\Education.BLL\bin\Debug\Education.DAL.pdb
 C:\Project .Net\Project\Education.BLL\bin\Debug\Education.DAL.dll.config
 C:\Project .Net\Project\Education.BLL\bin\Debug\EntityFramework.xml
 C:\Project .Net\Project\Education.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Project .Net\Project\Education.BLL\bin\Debug\Newtonsoft.Json.xml
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.csproj.AssemblyReference.cache
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CoreCompileInputs.cache
 C:\Project .Net\Project\Education.BLL\obj\Debug\Education.BLL.csproj.CopyComplete

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +12,7 @@ namespace Education.DAL
     public class Candicate
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -24,8 +26,10 @@ namespace Education.DAL
         public string Phone { get; set; }
         public string Address { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday  { get; set; }
         [Display(Name = "Joining Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime JoiningDate  { get; set; }
         [Display(Name = "User Id")]
@@ -34,9 +38,13 @@ namespace Education.DAL
         public virtual User User { get; set; }
         [Display(Name = "Created At")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreatedAt  { get; set; }
         [Display(Name = "Updated At")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime? UpdatedAt  { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<LearningInfo> LearningInfos { get; set; }
     }
 }

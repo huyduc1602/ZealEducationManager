@@ -14,32 +14,49 @@ namespace Education.DAL
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<EducationManageDbContext, Configuration>("Education"));
         }
-        //protected override void OnModelCreating(ModelBuilder modelbuilder)
-        //{
-        //    foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //    {
-        //        relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        //    }
+        protected override void OnModelCreating(DbModelBuilder modelbuilder)
+        {
+            modelbuilder.Entity<Course>()
+            .HasOptional<User>(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId)
+            .WillCascadeOnDelete(false);
+            
+            modelbuilder.Entity<LearningInfo>()
+            .HasOptional<ClassRoom>(s => s.ClassRoom)
+            .WithMany()
+            .HasForeignKey(s => s.RoomId)
+            .WillCascadeOnDelete(false);
 
-        //    base.OnModelCreating(modelbuilder);
-        //}
-        public virtual DbSet<Batch> Batch { get; set; }
+            modelbuilder.Entity<LearningInfo>()
+            .HasOptional<Exam>(s => s.Exam)
+            .WithMany()
+            .HasForeignKey(s => s.ExamId)
+            .WillCascadeOnDelete(false);
 
-        public System.Data.Entity.DbSet<Education.DAL.Blog> Blogs { get; set; }
+            modelbuilder.Entity<LearningInfo>()
+            .HasOptional<User>(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId)
+            .WillCascadeOnDelete(false);
+        }
+        public virtual DbSet<ClassRoom> ClassRooms { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.Category> Categories { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.User> Users { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.Course> Courses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.GroupUser> GroupUsers { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.Exam> Exams { get; set; }
+        public virtual DbSet<GroupUser> GroupUsers { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.Candicate> Candicates { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
 
-        public System.Data.Entity.DbSet<Education.DAL.Faulty> Faulties { get; set; }
+        public virtual DbSet<Candicate> Candicates { get; set; }
+
+        public virtual DbSet<Faulty> Faulties { get; set; }
     }
 
 }

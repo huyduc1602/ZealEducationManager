@@ -60,12 +60,8 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
-                                <select class="form-control" id="Gender">
-                                    <option value="2">Select Gender</option>
-                                    <option value="0">Female</option>
-                                    <option value="1">Male</option>
-                                </select>
-                                @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
+                                @Html.DropDownList("Gender", (IEnumerable<SelectListItem>)ViewBag.Gender, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -85,7 +81,7 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JoiningDate, htmlAttributes: new { @class = "control-label" })
-                                @Html.EditorFor(model => model.JoiningDate, new { htmlAttributes = new {type = "date", @class = "form-control" } })
+                                @Html.EditorFor(model => model.JoiningDate, new { htmlAttributes = new { type = "date", @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -93,8 +89,9 @@
                         <div class="col-12 col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label" })
-                                <input type="file" name="Image" class="form-control" />
-                                @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
+                                <input type="file" name="Image" class="form-control image" id="Image" />
+                                <img style="width:45px" id="blah" src="#" alt="your image" />
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-12">
@@ -154,3 +151,23 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(input).next('img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(".image").change(function () {
+            readURL(this);
+        });
+    </script>
+}

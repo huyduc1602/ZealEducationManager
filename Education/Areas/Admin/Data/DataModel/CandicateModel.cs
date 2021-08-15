@@ -10,7 +10,6 @@ namespace Education.Areas.Admin.Data.DataModel
 {
     public class CandicateModel
     {
-        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Student code is not left blank")]
         [RegularExpression("^[A-Z][A-Z0-9]{2,9}$", ErrorMessage = "Code starts with flower print, including flower printing and numbers. From 3 to 10 characters")]
@@ -31,13 +30,19 @@ namespace Education.Areas.Admin.Data.DataModel
         [RegularExpression("^[0]([0-9]){9,12}$", ErrorMessage = "Enter the phone number with a length of 10 to 13 characters, start 0 ****!")]
         public string ParentPhone { get; set; }
         public HttpPostedFileBase Image { get; set; }
-        public bool Gender { get; set; }
+        [Display(Name = "Image")]
+        public string ImageDisplay { get; set; }
+        public int Gender { get; set; }
         [Required(ErrorMessage = "Student Address is not left blank")]
         public string Address { get; set; }
         [Required(ErrorMessage = "Student Birthday is not left blank")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         [Display(Name = "Joining Date")]
         [Required(ErrorMessage = "Student Joining Date is not left blank")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime JoiningDate { get; set; }
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Student Full Name is not left blank")]
@@ -45,9 +50,11 @@ namespace Education.Areas.Admin.Data.DataModel
         [Display(Name = "UserName")]
         [Required(ErrorMessage = "Student UserName is not left blank")]
         public string UserName { get; set; }
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Student Password is not left blank")]
-        [RegularExpression("^[a-zA-Z]([a-zA-Z0-9]){4,14}$", ErrorMessage = "Enter the password that does not contain special characters, lengths from 5 to 15 characters!")]
+        [RegularExpression("^([a-zA-Z0-9]){5,15}$", ErrorMessage = "Enter the password that does not contain special characters, lengths from 5 to 15 characters!")]
         public string Password { get; set; }
+        [DataType(DataType.Password)]
         [Display(Name = "Repeat Password")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
         public string RepeatPassword { get; set; }

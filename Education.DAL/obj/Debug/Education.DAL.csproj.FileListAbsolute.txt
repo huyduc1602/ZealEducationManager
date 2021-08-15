@@ -83,6 +83,7 @@ C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Logging.Abs
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Logging.dll
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Options.dll
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Project .Net\Project\Education.DAL\bin\Debug\Newtonsoft.Json.dll
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Buffers.dll
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Collections.Immutable.dll
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.ComponentModel.Annotations.dll
@@ -107,6 +108,7 @@ C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Logging.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Options.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\Project .Net\Project\Education.DAL\bin\Debug\Newtonsoft.Json.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Buffers.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Collections.Immutable.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Diagnostics.DiagnosticSource.xml
@@ -114,7 +116,6 @@ C:\Project .Net\Project\Education.DAL\bin\Debug\System.Memory.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Numerics.Vectors.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Project .Net\Project\Education.DAL\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Project .Net\Project\Education.DAL\obj\Debug\Education.DAL.csproj.AssemblyReference.cache
 C:\Project .Net\Project\Education.DAL\obj\Debug\Education.DAL.csproj.CoreCompileInputs.cache
 C:\Project .Net\Project\Education.DAL\obj\Debug\Education.DAL.csproj.CopyComplete
 C:\Project .Net\Project\Education.DAL\obj\Debug\Education.DAL.dll

@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Education.DAL.Batch>
+﻿@model IEnumerable<Education.DAL.ClassRoom>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section plugincss{
@@ -28,6 +29,7 @@
     <div class="col-sm-12">
         <div class="card card-table">
             <div class="card-body">
+                <input type="text" placeholder="Search" id="search-batch" class="search">
                 <div class="table-responsive">
                     <table class="table table-hover table-center mb-0 datatable">
                         <thead>
@@ -36,14 +38,12 @@
                                 <th>@Html.DisplayNameFor(model => model.Name)</th>
                                 <th>@Html.DisplayNameFor(model => model.StartDate)</th>
                                 <th>@Html.DisplayNameFor(model => model.EndDate)</th>
-                                <th>@Html.DisplayNameFor(model => model.Course.Name)</th>
-                                <th>@Html.DisplayNameFor(model => model.Faulty.Name)</th>
                                 <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
                                 <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="load-batch">
                             @foreach (var item in Model)
                             {
                                 <tr>
@@ -51,13 +51,11 @@
                                     <td> @Html.DisplayFor(modelItem => item.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Course.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Faulty.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
                                     <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="@Url.Action("Edit","Blog")" class="btn btn-sm bg-success-light mr-2">
+                                            <a href="/Admin/Batch/Edit/@Html.DisplayFor(modelItem => item.Id)" class="btn btn-sm bg-success-light mr-2">
                                                 <i class="fas fa-pen"></i>
                                             </a>
                                             <a href="#" class="btn btn-sm bg-danger-light" data="@item.Id">
@@ -77,4 +75,128 @@
 </div>
 @section pluginjs{
     <script src="~/Areas/Admin/Content/assets/plugins/datatables/datatables.min.js"></script>
+}
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script>
+        var manageClassRoom = {
+            load: function (CurrentPage = 1, Limit = 10, Key = null) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/Batch/GetData",
+                    data: { CurrentPage: CurrentPage, Limit: Limit, Key: Key },
+                    success: function (res) {
+                        res.data = JSON.parse(res.data);
+                        console.log(res.data);
+                        html = '';
+                        for (let item of res.data) {
+                            let startDate = moment(item.StartDate).format('DD-MM-YYYY');
+                            let endDate = moment(item.EndDate).format('DD-MM-YYYY');
+                            let createAt = moment(item.CreatedAt).format('DD-MM-YYYY');
+                            let updateAt = '';
+                            if (item.UpdatedAt != null) {
+                                updateAt = moment(item.UpdatedAt).format('DD-MM-YYYY');
+                            } else {
+                                updateAt = 'Chưa cập nhật';
+                            }
+                            html += `<tr>
+                                         <td>${item.Code}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="/Admin/Batch/Details/${item.Id}">${item.Name}</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>${startDate}</td>
+                                                        <td>${endDate}</td>
+                                                        <td>${createAt}</td>
+                                                        <td>${updateAt}</td>
+                                                        <td class="text-right">
+                                                            <div class="actions">
+                                                                <a href="/Admin/Batch/Edit/${item.Id}" class="btn btn-sm bg-success-light mr-2">
+                                                                    <i class="fas fa-pen"></i>
+                                                                </a>
+                                                                <a class="btn btn-sm btn-warning btn-remove" data-id="${item.Id}">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>`;
+                        }
+                        let paginate = '';
+                        if (res.paginate.CurrentPage == 1) {
+                            paginate += `<li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
+                                                            <a href="javascript:void(0)" aria-controls="DataTables_Table_0" class="page-link">Previous</a>
+                                                        </li>`;
+                        } else {
+                            paginate += `<li class="paginate_button page-item previous page-previous" id="DataTables_Table_0_previous">
+                                                            <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${res.paginate.CurrentPage - 1}" class="page-link page">Previous</a>
+                                                        </li>`;
+                        }
+                        for (var i = 1; i <= res.paginate.TotalPage; i++) {
+                            if (i == res.paginate.CurrentPage) {
+                                paginate += `<li class="paginate_button page-item active">
+                                                            <a href="javascript:void(0)" data-id="${i}" aria-controls="DataTables_Table_0" class="page-link current-page">${i}</a>
+                                                        </li>`;
+                            } else {
+                                paginate += `<li class="paginate_button page-item">
+                                                            <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${i}" class="page-link page">${i}</a>
+                                                        </li>`;
+                            }
+                        }
+                        if (res.paginate.CurrentPage == res.paginate.TotalPage) {
+                            paginate += `<li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
+                                                            <a href="javascript:void(0)" aria-controls="DataTables_Table_0" class="page-link">Next</a>
+                                                        </li>`;
+                        } else {
+                            paginate += `<li class="paginate_button page-item next page-next" id="DataTables_Table_0_next">
+                                                            <a href="javascript:void(0)" aria-controls="DataTables_Table_0" data-id="${res.paginate.CurrentPage + 1}" class="page-link page">Next</a>
+                                                        </li>`;
+                        }
+                        $(".load-batch").html(html);
+                        $(".pagination").html(paginate);
+                    }
+                })
+            },
+            delete: function (id, limit, key, currentPage) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/Batch/Remove",
+                    data: { id: id },
+                    success: function (data) {
+                        if (data.StatusCode == 200) {
+                            alert(data.message);
+                            manageClassRoom.load(currentPage, limit, key);
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                })
+            }
+        }
+        $(function () {
+            manageClassRoom.load();
+            $(".custom-select").change(function () {
+                let limit = $(".custom-select").val();
+                let key = $("#search-batch").val();
+                manageClassRoom.load(1, limit, key);
+            });
+            $(document).on("click", ".page", function () {
+                let page = $(this).data("id");
+                let limit = $(".custom-select").val();
+                let key = $("#search-batch").val();
+                manageClassRoom.load(page, limit, key);
+            })
+            $("#search-batch").keyup(function () {
+                let limit = $(".custom-select").val();
+                let key = $("#search-batch").val();
+                manageClassRoom.load(1, limit, key);
+            })
+            $(document).on("click", ".btn-remove", function () {
+                let id = $(this).data("id");
+                let limit = $(".custom-select").val();
+                let key = $("#search-batch").val();
+                manageClassRoom.delete(id, limit, key, 1);
+            })
+        })
+    </script>
 }
