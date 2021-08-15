@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "GrantPermission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Grant Permission</h2>
+<div>
+    <div class="form-inline mt-5">
+        @Html.DropDownList("UserGroup", null, new { @class = "form-control" })
+        @Html.DropDownList("Business", null, new { @class = "form-control ml-5" })
+    </div>
+    <div class="row list-permission mt-5">
+        
+    </div>
+</div>
+@section scripts{
+    <script>
+        function loadPermission() {
+            let grId = $("#UserGroup").val();
+            let busId = $("#Business").val();
+            $.ajax({
+                type: 'GET',
+                url: '/Admin/GroupUsers/GetPermission',
+                data: { groupId: grId, businessId: busId },
+                success: function (res) {
+                    console.log(res);
+                    let html = '';
+                    $.each(res, function (idex,item) {
+                        html += `<div class="col-md-4">
+                                <label>
+                                <input class="item_click" ${item.IsGranted? 'checked':''} type="checkbox" name="name" value="${item.Id}" /> ${item.Description}
+                                </label >
+                            </div >`;
+                    })
+                    $(".list-permission").html(html);
+                }
+            })
+        }
+        $(function () {
+            loadPermission();
+            $("#UserGroup").change(function () {
+                loadPermission();
+            });
+            $("#Business").change(function () {
+                loadPermission();
+            });
+            $(document).on('change', '.item_click', function () {
+                let grId = $("#UserGroup").val();
+                let busId = $(this).val();
+                console.log(grId);
+                console.log(busId);
+                $.ajax({
+                    type: 'GET',
+                    url: '/Admin/GroupUsers/ChangePermission',
+                    data: { grId: grId, perId: busId },
+                    success: function (res) {
+                        alert(res.msg);
+                    }
+                })
+            })
+        })
+    </script>
+}
+

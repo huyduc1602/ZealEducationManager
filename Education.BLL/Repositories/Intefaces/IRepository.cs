@@ -11,11 +11,11 @@ namespace Education.BLL
     {
         IEnumerable<T> Get();
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
-        bool checkDuplicate(Expression<Func<T, bool>> predicate);
-        bool add(T model);
-        bool edit(T model);
-        T findById(object id);
-        bool remove(object id);
-        bool remove(T item);
+        bool CheckDuplicate(Expression<Func<T, bool>> predicate);
+        bool Add(T model);
+        bool Edit(T model);
+        T FindById(object id);
+        bool Remove(object id);
+        bool Remove(T item);
     }
 }

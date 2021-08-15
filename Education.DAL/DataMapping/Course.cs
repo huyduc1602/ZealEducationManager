@@ -17,7 +17,6 @@ namespace Education.DAL
         public string Code { get; set; }
         public double Price { get; set; }
         public double SalePrice { get; set; }
-
         public string Detail { get; set; }
         public string Image { get; set; }
         public int MaximumCandicate { get; set; }

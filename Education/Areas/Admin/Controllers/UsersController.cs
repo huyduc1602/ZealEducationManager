@@ -8,16 +8,17 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Education.Areas.Admin.Data;
 using Education.BLL;
 using Education.DAL;
 
 namespace Education.Areas.Admin.Controllers
 {
+    [CustomizeAuthorize]
     public class UsersController : Controller
     {
         private EducationManageDbContext db = new EducationManageDbContext();
         private EducationManageDbContext ctx;
-        private IRepository<User> tblUser;
         public UsersController()
         {
             ctx = new EducationManageDbContext();

@@ -23,7 +23,7 @@ namespace Education.Areas.Admin.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
-            if (Session["idUser"] != null)
+            if (Session["user"] != null)
             {
                 return View();
             }
@@ -52,7 +52,7 @@ namespace Education.Areas.Admin.Controllers
                 {
                     _user.Password = GetMD5(_user.Password);
                     ctx.Configuration.ValidateOnSaveEnabled = false;
-                    tblUser.add(_user);
+                    tblUser.Add(_user);
                     ctx.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -79,17 +79,15 @@ namespace Education.Areas.Admin.Controllers
                 string username = u.UserName;
                 string password = u.Password;
                 var f_password = GetMD5(password);
-                var data = tblUser.Get(s => s.UserName.Equals(username) && s.Password.Equals(password));
+                var data = tblUser.Get(s => s.UserName.Equals(username) && s.Password.Equals(f_password));
                 if (data.Count() > 0)
                 {
                     var dataUser = data.FirstOrDefault();
                     //add session
-                    Session["FullName"] = dataUser.FullName;
-                    Session["UserName"] = dataUser.UserName;
-                    Session["Email"] = dataUser.Email;
-                    Session["idUser"] = dataUser.Id;
-                    ViewBag.FullName = Session["FullName"];
-                    ViewBag.UserName = Session["UserName"];
+                    Session["user"] = dataUser;
+
+                    ViewBag.FullName = dataUser.FullName;
+                    ViewBag.UserName = dataUser.UserName;
                     return RedirectToAction("Index");
                 }
                 else

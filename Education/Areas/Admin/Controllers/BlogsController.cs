@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Education.Areas.Admin.Data;
 using Education.DAL;
 
 namespace Education.Areas.Admin.Controllers
 {
+    [CustomizeAuthorize]
     public class BlogsController : Controller
     {
         private EducationManageDbContext db = new EducationManageDbContext();
