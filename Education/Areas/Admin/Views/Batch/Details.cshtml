@@ -1,0 +1,101 @@
+﻿@model Education.Areas.Admin.Data.ViewModel.BatchView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="page-title">Details Batch</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item">@Html.ActionLink("Candicates", "Index")</li>
+                <li class="breadcrumb-item active">Details Batch</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="form-title"><span>Batch Information</span></h5>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.StartDate, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.EndDate, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.User, "Creator or update", htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.Course, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Faulty, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.Faulty, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FaultyOld, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.FaultyOld, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.CreatedAt, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label" }) : 
+                            @Html.DisplayFor(model => model.UpdatedAt, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <a href="/Admin/Batch/Edit/@Html.DisplayFor(model => model.Id)" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

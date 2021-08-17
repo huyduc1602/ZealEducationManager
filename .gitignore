@@ -1,0 +1,8 @@
+Education/.vs
+Education/bin
+Education/obj
+Education.BLL/bin
+Education.BLL/obj
+Education.DAL/bin
+Education.DAL/obj
+.cache
